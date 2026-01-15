@@ -10,8 +10,8 @@ import java.io.IOException;
  * Manages user interactions and delegates operations to appropriate components.
  */
 public class AppController {
-    private RegisterService model;
-    private ConsoleView view;
+    private final RegisterService model;
+    private final ConsoleView view;
     private boolean isRunning;
     
     /**
@@ -45,7 +45,6 @@ public class AppController {
             
         } catch (Exception e) {
             view.showError("Error critico en el sistema: " + e.getMessage());
-            e.printStackTrace();
         }
         
         view.showMessage("Programa finalizado. Hasta pronto.");
@@ -55,7 +54,6 @@ public class AppController {
      * Initializes the system with welcome messages.
      */
     private void initializeSystem() {
-        view.clearScreen();
         view.showMessage("=== SISTEMA DE MATRICULA UNIVERSITARIA ===");
         view.showMessage("Desarrollado por: Leonardo Aguilar");
         view.showMessage("Curso: Desarrollo de Software II");

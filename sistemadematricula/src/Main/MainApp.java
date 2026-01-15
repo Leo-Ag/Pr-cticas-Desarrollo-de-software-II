@@ -19,7 +19,6 @@ public class MainApp {
         } catch (Exception e) {
             System.err.println("ERROR FATAL: No se pudo iniciar el sistema");
             System.err.println("Detalles: " + e.getMessage());
-            e.printStackTrace();
             System.exit(1);
         }
     }
