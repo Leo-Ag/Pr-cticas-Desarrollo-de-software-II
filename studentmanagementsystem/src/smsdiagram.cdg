@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="smsdiagram">
+  <ClassDiagramComponents>
+    <Class name="Student" package="" visibility="public" xPosition="62.0" yPosition="49.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="carnet" type="String" visibility="private"/>
+        <Field name="grades" type="float[]" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="StudentManager" package="" visibility="public" xPosition="285.0" yPosition="31.0">
+      <Fields>
+        <Field name="students" type="Student[]" visibility="private"/>
+        <Field name="counter" type="short" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="addStudent" returnType="Student" visibility="public">
+          <Argument type="Student" name="student"/>
+        </Method>
+        <Method name="updateGrade" returnType="void" visibility="public">
+          <Argument type="String" name="carnet"/>
+          <Argument type="float" name="grade"/>
+        </Method>
+        <Method name="deleteStudent" returnType="String" visibility="public">
+          <Argument type="String" name="carnet"/>
+        </Method>
+        <Method name="orderByAverage" returnType="void" visibility="public"/>
+        <Method name="findByCarnet" returnType="String" visibility="public">
+          <Argument type="String" name="carnet"/>
+        </Method>
+        <Method name="calculateAverage" returnType="float" visibility="public"/>
+        <Method name="getTopThree" returnType="Student[]" visibility="public"/>
+        <Method name="getAllStudents" returnType="Student[]" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ConsoleView" package="" visibility="public" xPosition="56.0" yPosition="240.0">
+      <Fields>
+        <Field name="reader" type="BufferedReader" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="showMenu" returnType="void" visibility="public"/>
+        <Method name="showStudentList" returnType="void" visibility="public"/>
+        <Method name="showTopThree" returnType="void" visibility="public"/>
+        <Method name="showMessage" returnType="void" visibility="public"/>
+        <Method name="showStudentDetails" returnType="void" visibility="public"/>
+        <Method name="readName" returnType="String" visibility="public"/>
+        <Method name="readCarnet" returnType="String" visibility="public"/>
+        <Method name="readGrades" returnType="float" visibility="public"/>
+        <Method name="readOption" returnType="byte" visibility="public"/>
+        <Method name="enterStudentsData" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="appController" package="" visibility="public" xPosition="802.0" yPosition="254.0">
+      <Fields>
+        <Field name="model" type="StudentManeger" visibility="private"/>
+        <Field name="view" type="ConsoleView" visibility="private"/>
+        <Field name="running" type="boolean" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="start" returnType="void" visibility="public"/>
+        <Method name="hadleStudentMenu" returnType="void" visibility="public"/>
+        <Method name="invokeAddStudent" returnType="void" visibility="public"/>
+        <Method name="invokeListStudents" returnType="void" visibility="public"/>
+        <Method name="invokeUpdateGrade" returnType="void" visibility="public"/>
+        <Method name="invokeDeleteStudent" returnType="void" visibility="public"/>
+        <Method name="invokeSortStudents" returnType="void" visibility="public"/>
+        <Method name="invokeSearchStudent" returnType="void" visibility="public"/>
+        <Method name="invokeTopThreeAverages" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ExceptionServer" package="" visibility="public" xPosition="371.0" yPosition="410.0">
+      <Fields/>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="ValidationException" package="" visibility="public" xPosition="573.0" yPosition="43.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="validateStudentExists" returnType="String" visibility="public">
+          <Argument type="StudentManager" name="manager"/>
+          <Argument type="String" name="carnet"/>
+        </Method>
+        <Method name="validateNoDuplicatedCarnet" returnType="String" visibility="public">
+          <Argument type="StudentManager" name="manager"/>
+          <Argument type="String" name="carnet"/>
+        </Method>
+        <Method name="validateNoEmptyCarnet" returnType="Sting" visibility="public">
+          <Argument type="Sting" name="carnet"/>
+        </Method>
+        <Method name="validateNoEmptyName" returnType="String" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="validateGradeRange" returnType="void" visibility="public"/>
+        <Method name="untitledMethod" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="dependency" source="StudentManager" target="Student" type="Composition" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <IsRelation name="is" source="ValidationException" target="ExceptionServer"/>
+    <UseRelation name="Use" source="StudentManager" target="ExceptionServer" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
