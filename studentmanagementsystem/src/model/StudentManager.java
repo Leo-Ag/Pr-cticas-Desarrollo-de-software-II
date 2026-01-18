@@ -13,10 +13,13 @@ public class StudentManager {
     private short counter;
 
     public Student addStudent(Student student) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        students[counter] = student;
+        counter++;
+        return student;
     }
 
     public void updateGrade(String carnet, float grade) {
+        
     }
 
     public String deleteStudent(String carnet) {

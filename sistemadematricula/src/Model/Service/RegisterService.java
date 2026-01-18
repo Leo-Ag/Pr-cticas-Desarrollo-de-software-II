@@ -22,7 +22,7 @@ public class RegisterService {
             throws BussinessException {
 
         ValidationService.validateCarnet(carnet);
-        ValidationService.validateNombre(nombre);
+        ValidationService.validateName(nombre);
         ValidationService.validateCapacity((byte) counterStudent, (byte) 100);
         ValidationService.validateNoDuplicatedCarnet(carnet, students, (byte) 0);
 

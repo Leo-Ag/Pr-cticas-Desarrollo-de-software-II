@@ -24,7 +24,7 @@ public class ValidationService {
         validateNoDuplicatedCarnet(carnet, students, (byte) (index + 1));
     }
 
-    public static void validateNombre(String nombre) throws BussinessException {
+    public static void validateName(String nombre) throws BussinessException {
         if (nombre == null || nombre.trim().isEmpty()) {
             throw new BussinessException("El nombre no puede estar vacío.");
         }
