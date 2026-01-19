@@ -94,6 +94,28 @@ public class StudentManager {
         }
         return searchByCarnet(carnet, (short) (index + 1));
     }
+    
+    /**
+     * Finds a student by their unique name using recursive linear search.
+     * Returns null if no student with the given name exists.
+     */
+    public Student findByName(String name) {
+        return searchByName(name, (short) 0);
+    }
+
+    /**
+     * Recursive helper that implements the linear search logic for
+     * findByName. Demonstrates recursive traversal through the student array.
+     */
+    private Student searchByName(String name, short index) {
+        if (index >= counter) {
+            return null;
+        }
+        if (students[index] != null && students[index].getName().equals(name)) {
+            return students[index];
+        }
+        return searchByName(name, (short) (index + 1));
+    }
 
     /**
      * Sorts all registered students by their average grade in descending order
