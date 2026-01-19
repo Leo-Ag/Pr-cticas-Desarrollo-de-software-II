@@ -94,7 +94,7 @@ public class StudentManager {
         }
         return searchByCarnet(carnet, (short) (index + 1));
     }
-    
+
     /**
      * Finds a student by their unique name using recursive linear search.
      * Returns null if no student with the given name exists.
@@ -104,8 +104,8 @@ public class StudentManager {
     }
 
     /**
-     * Recursive helper that implements the linear search logic for
-     * findByName. Demonstrates recursive traversal through the student array.
+     * Recursive helper that implements the linear search logic for findByName.
+     * Demonstrates recursive traversal through the student array.
      */
     private Student searchByName(String name, short index) {
         if (index >= counter) {
@@ -153,20 +153,17 @@ public class StudentManager {
      * summation. This method encapsulates the average calculation logic
      * separate from the Student class, respecting SRP.
      */
-    public float calculateStudentAverage(Student student) {
-        return calculateAverageRecursive(student.getGrades(), (short) 0);
-    }
-
-    /**
-     * Recursive implementation of average calculation. Mathematically
-     * equivalent to (sum/grades.length) through distributive property.
-     */
     private float calculateAverageRecursive(float[] grades, short index) {
         if (index >= grades.length) {
             return 0;
         }
-        return (grades[index] + calculateAverageRecursive(grades,
-                (short) (index + 1))) / grades.length;
+    
+        return grades[index] + calculateAverageRecursive(grades, (short) (index + 1));
+    }
+
+    public float calculateStudentAverage(Student student) {
+        float total = calculateAverageRecursive(student.getGrades(), (short) 0);
+        return total / student.getGrades().length; // Dividir UNA vez al final
     }
 
     /**

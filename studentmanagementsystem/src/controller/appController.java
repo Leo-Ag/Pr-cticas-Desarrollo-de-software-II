@@ -3,6 +3,7 @@ package controller;
 import model.Student;
 import model.StudentManager;
 import model.ValidationException;
+import model.Validator;
 import view.ConsoleView;
 
 /**
@@ -88,27 +89,49 @@ public class AppController {
      * Handles the complete student registration flow. Collects data from view,
      * validates through model, and shows results.
      */
-    private void addStudent() {
-        try {
-            String[] data = view.enterStudentData();
-
-            float[] grades = new float[3];
-            for (int i = 0; i < 3; i++) {
-                grades[i] = Float.parseFloat(data[2 + i]);
-            }
-
-            Student newStudent = new Student(data[0], data[1], grades);
-            model.addStudent(newStudent);
-
-            view.showMessage("Estudiante registrado exitosamente");
-
-        } catch (ValidationException e) {
-            view.showError(e.getMessage());
-        } catch (NumberFormatException e) {
-            view.showError("Las notas deben ser numeros validos");
+   /**
+ * Handles the complete student registration flow.
+ * Collects data from view, validates each grade immediately,
+ * and shows appropriate success or error messages.
+ */
+private void addStudent() {
+    try {
+        String[] data = view.enterStudentData();
+        
+        // Validate name and carnet are not empty
+        if (data[0] == null || data[0].trim().isEmpty()) {
+            view.showError("El nombre no puede estar vacio.");
+            return;
         }
+        if (data[1] == null || data[1].trim().isEmpty()) {
+            view.showError("El carnet no puede estar vacio.");
+            return;
+        }
+        
+        float[] grades = new float[3];
+        for (int i = 0; i < 3; i++) {
+            try {
+                grades[i] = Float.parseFloat(data[2 + i]);
+                // Validate EACH grade immediately with precise error
+                Validator.validateGradeRange(grades[i]);
+            } catch (NumberFormatException e) {
+                view.showError("La nota " + (i + 1) + " debe ser un numero valido.");
+                return;
+            } catch (ValidationException e) {
+                view.showError("La nota " + (i + 1) + ": " + e.getMessage());
+                return;
+            }
+        }
+        
+        Student newStudent = new Student(data[0].trim(), data[1].trim(), grades);
+        model.addStudent(newStudent);
+        
+        view.showMessage("Estudiante registrado exitosamente");
+        
+    } catch (ValidationException e) {
+        view.showError(e.getMessage());
     }
-
+}
     /**
      * Retrieves and displays all registered students. Shows informative message
      * if no students are registered.
